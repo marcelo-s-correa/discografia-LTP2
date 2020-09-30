@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+    
+    <h2> Lista de Musicas</h2>
+    <a class="pure-button pure-button-primary" href="{% url 'disco:musica_new' %}">Adicionar Música</a>
+    <hr>
+    <br></br>
+    <table id="myTable">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Musica</th>
+                <th>Banda</th>
+                <th>Album</th>
+                <th>Lançamento</th>
+                <th>Alterar</th>
+                <th>Deletar</th>
+            </tr>
+        </thead>
+        <tbody>
+          {% for i in musica_list %}
+            <tr>
+                <td>{{i.id}}</td>
+                <td>{{i.titulo}}</td>
+                <td>{{i.album.banda}}</td>
+                <td>{{i.album}}</td>
+                <td>{{i.album.data|date:"Y"}}</td>
+                <td><a href = "{% url 'disco:musica_edit' i.id %}">Alterar</a></td>
+                <td><a href = "{% url 'disco:musica_delete' i.id %}">Deletar</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+    <br></br>
+
+    {% endblock %}
